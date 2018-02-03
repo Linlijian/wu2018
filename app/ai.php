@@ -90,6 +90,8 @@ class AI
             return ['EN'];
          }
 
+
+
          
         return ['TH'];
     }
