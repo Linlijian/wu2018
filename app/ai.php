@@ -18,7 +18,21 @@ class AI
      */
     public static function getGender($text)
     {
-        return 'Male';
+        // if(strpos($text, "ครับ") != false){
+        //     return 'Mals';
+        // }
+        // return 'Feemals';
+        // $word = ["ค่ะ","ค่า"];
+        $pos = strrpos($text, "ค่ะ");
+        //$pos1 = strrpos($text, "ครับ");
+        if ($pos === false) { 
+            return 'Male';
+        }else{
+            return 'Female';
+        }
+        //else if ($pos1 === false) { 
+            return 'Unknown';
+        //}
     }
 
     /**
@@ -26,6 +40,12 @@ class AI
      */
     public static function getSentiment($text)
     {
+        $pos = strrpos($text, "น่ารัก");
+        if ($pos === false){
+            return 'Negative';
+        }else{
+            return 'Positive';
+        }
         return 'Neutral';
     }
 
@@ -34,7 +54,31 @@ class AI
      */
     public static function getRudeWords($text)
     {
-        return ['แสส'];
+        $myarray = array('เหี้ย','สัส');
+        $a = array_search($text,$myarray);
+        if(in_array($text, $myarray)){
+            return ["สัส",$a];
+         }else{
+            return ["น่ารัก"];
+         } 
+        // $max = sizeof($myarray);
+        // for($i = 0; $i <= $max;$i++){
+        //     if(strrpos($text, $myarray[$i]) == true){
+        //         return ["สัส"];
+        //         break;
+        //     }else{
+        //         return ["น่ารัก"];
+        //         break;
+        //     }
+        // }
+        // foreach($myarray as $a){
+        //     if(strrpos($text, $a) !== false){
+        //         return ["สัส"];
+        //     }else
+        //     if(strrpos($text, $a) == false){
+        //         return ["น่ารัก"];
+        //     }
+        // }
     }
 
     /**
@@ -42,6 +86,10 @@ class AI
      */
     public static function getLanguages($text)
     {
-        return ['TH', 'EN'];
+        if(preg_match('/^[a-zA-Z]+$/i',$text)){
+            return ['EN'];
+         }
+
+        return ['TH'];
     }
 }
